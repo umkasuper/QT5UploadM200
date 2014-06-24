@@ -1,0 +1,176 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>QTUpLoadM200Class</class>
+ <widget class="QWidget" name="QTUpLoadM200Class" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>251</width>
+    <height>149</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>QTUpLoadM200</string>
+  </property>
+  <widget class="QCheckBox" name="checkBox" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Open terminal window</string>
+   </property>
+   <property name="text" >
+    <string>Terminal</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboComPort" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>101</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Selected com port</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>118</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Progress load file to ats</string>
+   </property>
+   <property name="value" >
+    <number>24</number>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushTransfer" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Transfer file to ats</string>
+   </property>
+   <property name="text" >
+    <string>Transfer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushSelectFile" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>40</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Browse file</string>
+   </property>
+   <property name="text" >
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushOption" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>10</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Option</string>
+   </property>
+   <property name="text" >
+    <string>Option</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushAbout" >
+   <property name="geometry" >
+    <rect>
+     <x>170</x>
+     <y>130</y>
+     <width>21</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>About programm</string>
+   </property>
+   <property name="text" >
+    <string>?</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboSelectFile" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>101</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>File for load to ats</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboSelectType" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Type of loaders</string>
+   </property>
+   <item>
+    <property name="text" >
+     <string>SMP</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>ADSP</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>MUSIC(OFFICE)</string>
+    </property>
+   </item>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

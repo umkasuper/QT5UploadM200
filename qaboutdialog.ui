@@ -1,0 +1,93 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>QAboutDialogClass</class>
+ <widget class="QDialog" name="QAboutDialogClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>306</width>
+    <height>153</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>QAboutDialog</string>
+  </property>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>40</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>For platform 5100</string>
+   </property>
+   <property name="alignment" >
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>60</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Version 1.00 Beta</string>
+   </property>
+   <property name="alignment" >
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text" >
+    <string>QTUpload M200</string>
+   </property>
+   <property name="textFormat" >
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment" >
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushOk" >
+   <property name="geometry" >
+    <rect>
+     <x>120</x>
+     <y>110</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Close window</string>
+   </property>
+   <property name="text" >
+    <string>Ok</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

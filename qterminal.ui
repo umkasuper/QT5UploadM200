@@ -1,0 +1,161 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>QTerminalClass</class>
+ <widget class="QWidget" name="QTerminalClass" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>586</width>
+    <height>468</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>QTerminal</string>
+  </property>
+  <widget class="QSetButton" name="pushSetButton3" >
+   <property name="geometry" >
+    <rect>
+     <x>310</x>
+     <y>220</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QSetButton" name="pushSetButton4" >
+   <property name="geometry" >
+    <rect>
+     <x>430</x>
+     <y>250</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QSetButton" name="pushSetButton1" >
+   <property name="geometry" >
+    <rect>
+     <x>340</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QSetButton" name="pushSetButton2" >
+   <property name="geometry" >
+    <rect>
+     <x>420</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QSetButton" name="pushSetButton5" >
+   <property name="geometry" >
+    <rect>
+     <x>500</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QSetButton" name="pushSetButton6" >
+   <property name="geometry" >
+    <rect>
+     <x>350</x>
+     <y>330</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Programmer command</string>
+   </property>
+   <property name="text" >
+    <string>Set</string>
+   </property>
+  </widget>
+  <widget class="QHistryLine" name="lineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>241</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string>Line input comand</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushHistory" >
+   <property name="geometry" >
+    <rect>
+     <x>330</x>
+     <y>400</y>
+     <width>21</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>^</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>QHistryLine</class>
+   <extends>QLineEdit</extends>
+   <header>qhistryline.h</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>QSetButton</class>
+   <extends>QPushButton</extends>
+   <header>qsetbutton.h</header>
+   <container>0</container>
+   <pixmap></pixmap>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
