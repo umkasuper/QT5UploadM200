@@ -12,11 +12,11 @@ class QSetupDialog : public QDialog
 public:
     QSetupDialog(QWidget *parent = 0);
     ~QSetupDialog();
-	void setTimeReboot(QString &str) {ui.lineEdit->setText(str);};
-	void setTimeErase(QString &str) {ui.lineEdit_2->setText(str);};
-	void setTimeBlock(QString &str) {ui.lineEdit_3->setText(str);};
+	void setTimeReboot(const QString &str) {ui.lineEdit->setText(str);};
+	void setTimeErase(const QString &str) {ui.lineEdit_2->setText(str);};
+	void setTimeBlock(const QString &str) {ui.lineEdit_3->setText(str);};
 	
-	void setFontName(QString &name) {fontName = name;};
+	void setFontName(const QString &name) {fontName = name;};
 	void setFontSize(unsigned int size) {fontSize = size;};
 	void setFontItalic(bool italic) {fontItalic = italic;};
 	void setFontWidth(int width) {fontWidth = width;}

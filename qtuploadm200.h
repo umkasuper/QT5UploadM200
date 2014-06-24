@@ -14,7 +14,8 @@
 #define MAX_BUTTONS 6
 
 union CDWordAsArray {
-	DWORD m_Addres;
+//	DWORD m_Addres;
+	unsigned int m_Addres;
 	char m_ByteArray[4];
 };
 
@@ -67,8 +68,8 @@ private:
 	unsigned int terminalY;
 	unsigned int terminalWidth;
 	unsigned int terminalHeight;
-	QFile *openXML(QString &fileName, QDomDocument &doc, QDomElement &root);
-	void getElement(QDomDocument &doc, QDomElement &root, QString &elementName, QDomElement &element);
+	QFile *openXML(const QString &fileName, QDomDocument &doc, QDomElement &root);
+	void getElement(QDomDocument &doc, QDomElement &root, const QString &elementName, QDomElement &element);
 	void saveXML(QDomDocument &doc, QFile *file);
 
 	QColor backgroundColor;

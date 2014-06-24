@@ -6,7 +6,10 @@
 #include <QThread>
 #include <QWaitCondition>
 #include <QComboBox>
+
+#ifdef WIN32
 #include <Windows.h>
+#endif
 
 class QComPort : public QThread
 {
@@ -28,8 +31,9 @@ signals:
 protected:
 	void run();
 
+#ifdef WIN32
 	HANDLE com;
-
+#endif
 	QMutex mutex;
 	QWaitCondition condition;
 

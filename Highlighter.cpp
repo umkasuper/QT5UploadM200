@@ -1,7 +1,7 @@
 
 #include <QtGui>
 
-#include "highlighter.h"
+#include "Highlighter.h"
 
 Highlighter::Highlighter(QObject *parent) :  QObject(parent)
 

@@ -16,8 +16,8 @@ public:
 	void setButton(QSetButton *sender) {button = sender;};
 	QString getName() {return ui.lineName->text();} 
 	QString getCommand() {return ui.lineCommand->text();}
-	void setName(QString &m_name) {ui.lineName->setText(m_name);}
-	void setCommand(QString &m_command) {ui.lineCommand->setText(m_command);}
+	void setName(const QString &m_name) {ui.lineName->setText(m_name);}
+	void setCommand(const QString &m_command) {ui.lineCommand->setText(m_command);}
 
 private:
     Ui::QSetButtonDlgClass ui;

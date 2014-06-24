@@ -231,7 +231,7 @@ void QTerminal::on_pushSetButton1_clicked()
 	parseButton((QSetButton *)ui.pushSetButton1);
 }
 
-void QTerminal::setTerminalOutFont(QFont &setFont)
+void QTerminal::setTerminalOutFont(const QFont &setFont)
 {
 	textOutTerminal->setFont(setFont);
 	textOutTerminal->repaint();
@@ -290,7 +290,7 @@ void QTerminal::SetButtons(QString *name, QString *command, unsigned int count)
 	((QSetButton *)ui.pushSetButton3)->setCommand(command[2]);
 	((QSetButton *)ui.pushSetButton4)->setCommand(command[3]);
 	((QSetButton *)ui.pushSetButton5)->setCommand(command[4]);
-	((QSetButton *)ui.pushSetButton6)->setCommand(command[5]);	
+	((QSetButton *)ui.pushSetButton6)->setCommand(command[5]);
 }
 
 void QTerminal::on_pushSetButton3_clicked()

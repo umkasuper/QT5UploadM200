@@ -938,16 +938,16 @@ start_send:
 	// Создаем контрольну сумму
 	char CheckSum = 0;
 	int j = 0;
-    for (j = 0; j < m_CurrBlockSize + 6; j++)
+    for (j = 0; j < (int)m_CurrBlockSize + 6; j++)
 		CheckSum += m_Buffer[j];
 
 	CheckSum = ~CheckSum + 1;               
 	m_Buffer[m_CurrBlockSize + 6] = CheckSum; 
 
-	BOOL m_TransOk = FALSE;
-	for (j = 0; j < m_CurrBlockSize; j++) {
+	bool m_TransOk = false;
+	for (j = 0; j < (int)m_CurrBlockSize; j++) {
 		if ((unsigned char)m_Buffer[j + 6] != (unsigned char)0xFF) {
-			m_TransOk = TRUE;
+			m_TransOk = true;
 			break;
 		}
 	}
@@ -1011,7 +1011,7 @@ void QTUpLoadM200::on_command(QString &m_command)
 }
 
 
-QFile *QTUpLoadM200::openXML(QString &fileName, QDomDocument &doc, QDomElement &root)
+QFile *QTUpLoadM200::openXML(const QString &fileName, QDomDocument &doc, QDomElement &root)
 {
 	QFile *file = new QFile(fileName);
 	QString errorStr;
@@ -1040,7 +1040,7 @@ QFile *QTUpLoadM200::openXML(QString &fileName, QDomDocument &doc, QDomElement &
 	return NULL;
 }
 
-void QTUpLoadM200::getElement(QDomDocument &doc, QDomElement &root, QString &elementName, QDomElement &element)
+void QTUpLoadM200::getElement(QDomDocument &doc, QDomElement &root, const QString &elementName, QDomElement &element)
 {
 	element = root.firstChildElement(elementName);
 	if (element.isNull()) {

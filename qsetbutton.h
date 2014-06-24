@@ -11,8 +11,8 @@ class QSetButton : public QPushButton
 public:
     QSetButton(QWidget *parent);
     ~QSetButton();
-	void setName(QString &m_setName) {m_name = m_setName; setText(m_name);};
-	void setCommand(QString &m_setCommand) {m_command = m_setCommand;};
+	void setName(const QString &m_setName) {m_name = m_setName; setText(m_name);};
+	void setCommand(const QString &m_setCommand) {m_command = m_setCommand;};
 	void setNumber(unsigned int num) {number = num;}
 	unsigned int getNumber() {return number;}
 

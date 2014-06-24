@@ -10,10 +10,11 @@
 #include <QListWidgetItem>
 
 #include "ui_qterminal.h"
-#include "highlighter.h"
+#include "Highlighter.h"
 #include "qsetbutton.h"
 #include "qsetbuttondlg.h"
 #include "QTerminalBrowser.h"
+
 class QTerminal : public QWidget
 {
 	Q_OBJECT
@@ -25,7 +26,7 @@ public:
 	void closeEvent ( QCloseEvent * e );
 	QLineEdit *getLineEdit() {return ui.lineEdit;};
 	void displayData(QString rcvString, bool insertBlock);
-	void setTerminalOutFont(QFont &setFont);
+	void setTerminalOutFont(const QFont &setFont);
 	void SetButtons(QString *name, QString *command, unsigned int count);
 	QTextBrowser *getTerminal() {return textOutTerminal;};
 
@@ -45,8 +46,8 @@ signals:
 	void closed();
 	void keyPress(QKeyEvent * e);
 	void transferStart();
-	void buttonChanged(unsigned int number, QString &m_name, QString &m_command);
-	void command(QString &m_command);
+	void buttonChanged(unsigned int number, const QString &m_name, const QString &m_command);
+	void command(const QString &m_command);
 
 private slots:
 	void on_pushHistory_clicked();

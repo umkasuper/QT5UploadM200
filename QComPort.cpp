@@ -1,4 +1,4 @@
-#include ".\qcomport.h"
+#include "QComPort.h"
 
 #include <QtGui>
 
@@ -6,7 +6,9 @@ QComPort::QComPort(QObject *parent) :
 QThread(parent)
 
 {
+#ifdef WIN32
 	com = INVALID_HANDLE_VALUE;
+#endif
 }
 
 QComPort::~QComPort(void)
@@ -20,7 +22,7 @@ QComPort::~QComPort(void)
 
 void QComPort::fillPortList(QComboBox *portList)
 {
-
+#ifdef WIN32
 	HKEY hkResult;
 	if (RegOpenKey(HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM", &hkResult) == ERROR_SUCCESS)
 	{
@@ -38,13 +40,15 @@ void QComPort::fillPortList(QComboBox *portList)
 			portList->addItem(lpValue);
 		}
 		RegCloseKey(hkResult);
-
 	}
+#endif
 }
 
 unsigned char pBuffer[501];
+#ifdef WIN32
 OVERLAPPED ov;
-DWORD dwBytesRead;
+unsigned int dwBytesRead;
+#endif
 
 void QComPort::run()
 {
@@ -53,6 +57,7 @@ void QComPort::run()
 	//dwBytesRead = 0;
 
 	forever {
+#ifdef WIN32
 		ov.OffsetHigh=0;
 		ov.Offset=0;
 		if (com != INVALID_HANDLE_VALUE)
@@ -76,12 +81,14 @@ void QComPort::run()
 				mutex.unlock();
 			}
 		}
+#endif
 		msleep(150);
 	}
 }
 
 bool QComPort::openComPort(QString comName)
 {  // std::string.c_str();
+#ifdef WIN32
 	char name[50];
 	if (com != INVALID_HANDLE_VALUE) // Все уже ок
 		return true;
@@ -114,16 +121,20 @@ bool QComPort::openComPort(QString comName)
 		SetCommTimeouts(com, &cTO);
 		return true;
 	}
+#endif
 	return false;
 }
 void QComPort::closeComPort()
 {
+#ifdef WIN32
 	CloseHandle(com);
 	com = INVALID_HANDLE_VALUE;
+#endif
 }
 
 bool QComPort::sendData(char *buffer, unsigned int len)
 {
+#ifdef WIN32
 	OVERLAPPED ov;
 	ov.OffsetHigh=0;
 	ov.Offset=0;
@@ -135,8 +146,8 @@ bool QComPort::sendData(char *buffer, unsigned int len)
 		if (len != dwBytesWrite)
 			return false;
 	}
+#endif
 	return true;
-
 }
 
 void QComPort::recvComplite()

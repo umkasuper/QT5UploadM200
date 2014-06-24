@@ -1,4 +1,4 @@
-#include ".\qterminalbrowser.h"
+#include "QTerminalBrowser.h"
 #include <QPainter>
 
 QTerminalBrowser::QTerminalBrowser(QWidget *parent, QColor &backgroundColor) : QTextBrowser(parent)
