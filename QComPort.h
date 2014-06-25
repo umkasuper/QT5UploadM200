@@ -22,7 +22,7 @@ public:
 	bool openComPort(QString comName);
 	void closeComPort();
 	void fillPortList(QComboBox *portList);
-	bool sendData(char *buffer, unsigned int len);
+	bool sendData(const char *buffer, unsigned int len);
 	void recvComplite();
 
 signals:

@@ -132,7 +132,7 @@ void QComPort::closeComPort()
 #endif
 }
 
-bool QComPort::sendData(char *buffer, unsigned int len)
+bool QComPort::sendData(const char *buffer, unsigned int len)
 {
 #ifdef WIN32
 	OVERLAPPED ov;

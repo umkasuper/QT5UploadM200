@@ -10,6 +10,10 @@
 #include <QProgressBar>
 #include <QStyleFactory>
 
+#include <iostream>
+
+#define FNAME QDir::tempPath() + "/properts.xml"
+
 QTUpLoadM200::QTUpLoadM200(QWidget *parent)
 : QWidget(parent)
 {
@@ -17,18 +21,18 @@ QTUpLoadM200::QTUpLoadM200(QWidget *parent)
 	terminal = NULL;
 	QGridLayout *layout = new QGridLayout; 
 	layout->setColumnStretch(0, 1);
-	layout->addWidget(ui.checkBox,0,0);	
-	layout->addWidget(ui.pushOption,0,1);	
-	layout->addWidget(ui.comboSelectFile,1,0);	
-	layout->addWidget(ui.pushSelectFile,1,1);	
-	layout->addWidget(ui.comboSelectType,2,0);	
-	layout->addWidget(ui.pushTransfer,2,1);	
+	layout->addWidget(ui.checkBox,0,0);
+	layout->addWidget(ui.pushOption,0,1);
+	layout->addWidget(ui.comboSelectFile,1,0);
+	layout->addWidget(ui.pushSelectFile,1,1);
+	layout->addWidget(ui.comboSelectType,2,0);
+	layout->addWidget(ui.pushTransfer,2,1);
 
 	QHBoxLayout *line4 = new QHBoxLayout;
-	line4->addWidget(ui.comboComPort);  
+	line4->addWidget(ui.comboComPort);
 	line4->addWidget(ui.progressBar);   //QProgressBar
-	layout->addLayout(line4,3,0);   
-	layout->addWidget(ui.pushAbout,3,1);	
+	layout->addLayout(line4,3,0);
+	layout->addWidget(ui.pushAbout,3,1);
 
 	connect(ui.comboComPort, SIGNAL(activated ( const QString & )), this, SLOT(activatedComPort ( const QString & )));
 	connect(ui.comboSelectFile, SIGNAL(activated ( int )), this, SLOT(activatedSelectFile ( int )));
@@ -57,7 +61,8 @@ QTUpLoadM200::QTUpLoadM200(QWidget *parent)
 
 	// Тут все считываем из xml
 	// Все будет совместимо с unix like 
-	QFile file(QDir::tempPath() + "properts.xml");
+	std::cout << QDir::tempPath().toUtf8().constData() +  std::string("/properts.xml") << std::endl;
+	QFile file(FNAME);
 
 	// И остальные настройки то же инициализируем
 	timeBlock = 5000;
@@ -75,7 +80,7 @@ QTUpLoadM200::QTUpLoadM200(QWidget *parent)
 	terminalHeight = 200;
 
 	backgroundColor = Qt::white;
-	mainColor =	Qt::black;
+	mainColor = Qt::black;
 	errorColor = Qt::red;
 	callColor = Qt::blue;
 
@@ -234,7 +239,7 @@ QTUpLoadM200::QTUpLoadM200(QWidget *parent)
 			if (root.hasAttribute("value")) {
 				int com = ui.comboComPort->findText(root.attribute("value"));
 				if (com != -1)
-					ui.comboComPort->setCurrentIndex(com);				
+					ui.comboComPort->setCurrentIndex(com);
 			}
 		}
 		if (root.tagName() == "selected_type")
@@ -350,7 +355,7 @@ void QTUpLoadM200::on_checkBox_stateChanged(int)
 		connect(terminal, SIGNAL( keyPress(QKeyEvent *)), this, SLOT(terminalKeyPressed(QKeyEvent *)));
 		connect(terminal, SIGNAL(transferStart()), this, SLOT(transferStart()));
 		connect(terminal, SIGNAL(buttonChanged(unsigned int, QString&, QString&)), this, SLOT(buttonChanged(unsigned int, QString&, QString&)));	
-		connect(terminal, SIGNAL(command(QString&)), this, SLOT(on_command(QString&)));	
+		connect(terminal, SIGNAL(command(QString&)), this, SLOT(on_command(QString&)));
 
 		terminal->setTerminalOutFont(QFont(fontName, fontSize, fontWidth, fontItalic));
 		terminal->setGeometry(terminalX, terminalY, terminalWidth,terminalHeight);
@@ -374,7 +379,7 @@ void QTUpLoadM200::on_checkBox_stateChanged(int)
 			QDomElement root;
 			QDomElement element;
 
-			QFile *file = openXML( QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+			QFile *file = openXML(QString(FNAME), domDocument, root);
 			if (file != NULL) 
 			{
 				getElement(domDocument,root, QString("terminal_setup"),element);
@@ -425,7 +430,7 @@ void QTUpLoadM200::on_pushOption_clicked()
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		QDomElement reboot_time;
@@ -513,7 +518,6 @@ void QTUpLoadM200::on_pushOption_clicked()
 	fontWidth = m_setup.getFontWidth();
 	if (terminal != NULL)
 		terminal->setTerminalOutFont(QFont(fontName, fontSize,fontWidth, fontItalic));
-
 }
 
 void QTUpLoadM200::on_pushSelectFile_clicked()
@@ -549,7 +553,7 @@ void QTUpLoadM200::addFile(QString &fileName)
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("history"),element);
@@ -575,7 +579,7 @@ void QTUpLoadM200::timeOut()
 				tr("Could not reboot station,\n"
 				"may be problems whis RS232\n"),
 				QMessageBox::Ok | QMessageBox::Default,
-				0);			
+				0);
 		};break;
 	case 2: // Не дождались стирания файла
 		{
@@ -583,7 +587,7 @@ void QTUpLoadM200::timeOut()
 			QMessageBox::warning(this, tr("error"),
 				tr("Could not erase flash,\n"),
 				QMessageBox::Ok | QMessageBox::Default,
-				0);			
+				0);
 		};break;
 	case 3: // Не смогли записать блок
 		{
@@ -685,7 +689,7 @@ void QTUpLoadM200::transfer(unsigned char *pBuffer, int len)
 		}; break;
 	case 1: // Ждем появления '.'
 		{
-			// Ждем фразу стирание закончено или не закончено			
+			// Ждем фразу стирание закончено или не закончено
 			for (int i = 0; i < len; i++)
 			{
 				if (pBuffer[i] == '.') 
@@ -693,11 +697,11 @@ void QTUpLoadM200::transfer(unsigned char *pBuffer, int len)
 					timer->stop();
 					timer->start(timeErase);
 					stageTransfer = 2;
-					if (typeLoad == 1)					
+					if (typeLoad == 1)
 						comPortThread.sendData("#a\r\n", 4);
-					if (typeLoad == 2)					
+					if (typeLoad == 2)
 						comPortThread.sendData("#b\r\n", 4);
-					if (typeLoad == 3)					
+					if (typeLoad == 3)
 						comPortThread.sendData("#b\r\n", 4);
 					break;
 				}
@@ -705,7 +709,7 @@ void QTUpLoadM200::transfer(unsigned char *pBuffer, int len)
 		}; break;
 	case 2:
 		{
-			// Ждем фразу стирание закончено или не закончено			
+			// Ждем фразу стирание закончено или не закончено
 			if (typeLoad == 1 || typeLoad == 3)
 			{
 				if ((strlen(prevStr) + len) < 200) // еще можно добавлять
@@ -784,7 +788,7 @@ void QTUpLoadM200::transfer(unsigned char *pBuffer, int len)
 					on_pushTransfer_clicked();
 					return;
 				}
-				//Все конец	
+				//Все конец
 				// Тут же позиционируем скроллер
 				timer->stop();
 				timer->start(timeBlock);
@@ -933,7 +937,7 @@ start_send:
 	fseek(file,blockCount * m_BlockSize,SEEK_SET );
 	int readed = fread(m_Buffer + 6,  sizeof( char ), m_CurrBlockSize, file);
 	if (readed != m_CurrBlockSize) {
-		return 2;		
+		return 2;
 	}
 	// Создаем контрольну сумму
 	char CheckSum = 0;
@@ -982,7 +986,7 @@ void QTUpLoadM200::closeEvent ( QCloseEvent * event )
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("M200Window"),element);
@@ -1030,10 +1034,10 @@ QFile *QTUpLoadM200::openXML(const QString &fileName, QDomDocument &doc, QDomEle
 
 			root = doc.createElement("properts");
 			doc.appendChild(root);
-			root.setAttribute( "version", "1.0");  
+			root.setAttribute( "version", "1.0");
 		} else {
 			root = doc.documentElement();
-		}								
+		}
 		return file;
 	}
 	delete file;
@@ -1074,7 +1078,7 @@ void QTUpLoadM200::activatedSelectType(const QString & name)
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("selected_type"),element);
@@ -1090,7 +1094,7 @@ void QTUpLoadM200::activatedSelectFile(int index)
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("history"),element);
@@ -1107,7 +1111,7 @@ void QTUpLoadM200::activatedComPort (const QString & name)
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("comport"),element);
@@ -1121,7 +1125,7 @@ void QTUpLoadM200::buttonChanged(unsigned int number, QString &m_name, QString &
 	QDomDocument domDocument; // Для работы с настройками
 	QDomElement root;
 	QDomElement element;
-	QFile *file = openXML(QString(QDir::tempPath() + "properts.xml"), domDocument, root);
+	QFile *file = openXML(QString(FNAME), domDocument, root);
 	if (file != NULL) 
 	{
 		getElement(domDocument,root, QString("buttons"),element);
